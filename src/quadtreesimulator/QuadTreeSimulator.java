@@ -162,7 +162,7 @@ public class QuadTreeSimulator extends Application {
 		exit.setOnAction( ( ActionEvent e) -> Platform.exit());
 
 		Slider slider = new Slider( 0, 10, 7);
-		DoubleProperty depthOption = (DoubleProperty) scene.getOption( "quadTreeDepth");
+		DoubleProperty depthOption = (DoubleProperty) scene.getOption( "quadTreeDepth");  
 		depthOption.bind( slider.valueProperty());
 
 		CustomMenuItem ballLabel = new CustomMenuItem();
