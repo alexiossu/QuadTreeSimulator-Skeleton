@@ -4,4 +4,5 @@ module particlelocator {
 	requires transitive javafx.graphics;
 	requires transitive javafx.controls;
 	requires javafx.base;
+	requires java.base;
 }

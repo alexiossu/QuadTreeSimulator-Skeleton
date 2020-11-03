@@ -91,6 +91,27 @@ public class QuadTreeSimulator extends Application {
 	public void init() throws Exception {
 
 		//TODO Complete
+		canvas = new Canvas (WIDTH, HEIGHT);
+		
+		ColorDetectionScene scene = new ColorDetectionScene();
+		scene.setCanvas(canvas);
+		scene.createScene();
+		
+		QuadTreeAnimator animator = new QuadTreeAnimator();
+		animator.setScene(scene);
+		
+		Region statusBar = createStatusBar();
+		Region optionsBar = createOptionsBar();
+		Region colorBar = createColorBar();
+		
+		root = new BorderPane();
+		root.setTop(optionsBar);
+		root.setBottom(statusBar);
+		root.setRight(colorBar);
+		root.setCenter(canvas);
+		
+		canvas.heightProperty().bind(root.heightProperty().subtract(statusBar.heightProperty()).subtract(optionsBar.heightProperty()));
+		canvas.heightProperty().bind(root.widthProperty().subtract(colorBar.widthProperty()));
 	}
 
 	/**
@@ -139,7 +160,34 @@ public class QuadTreeSimulator extends Application {
 	 */
 	private Region createColorBar() {
 		//TODO Complete
-		return null;
+		
+		ObjectProperty <Color> colorOption;
+		colorOption = new SimpleObjectProperty(Color.BLACK);
+		
+		scene.addOption("color", colorOption);
+		
+		Button color1 = new Button();
+		Button color2 = new Button();
+		Button color3 = new Button();
+		
+		color1.setMinSize(40, 16);
+		color2.setMinSize(40, 16);
+		color3.setMinSize(40, 16);
+		
+		color1.setStyle("-fx-border-color: #000000; -fx-border-width: 2px; -fx-background-color: RED");
+		color2.setStyle("-fx-border-color: #000000; -fx-border-width: 2px; -fx-background-color: RED");
+		color3.setStyle("-fx-border-color: #000000; -fx-border-width: 2px; -fx-background-color: RED");
+		
+		color1.setOnAction((ActionEvent e) -> colorOption.set(Color.GREEN));
+		color2.setOnAction((ActionEvent e) -> colorOption.set(Color.BLUE));
+		color3.setOnAction((ActionEvent e) -> colorOption.set(Color.BROWN));
+		
+		
+		ToolBar toolBar = new ToolBar(color1, color2, color3);
+		toolBar.setOrientation(Orientation.HORIZONTAL);
+		toolBar.setMinWidth(50.0);
+		
+		return toolBar;
 	}
 
 	/**
