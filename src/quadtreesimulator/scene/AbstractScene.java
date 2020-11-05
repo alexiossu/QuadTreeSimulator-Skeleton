@@ -13,12 +13,12 @@ public abstract class AbstractScene {
 	protected Map<String, Object> options;
 
 	public AbstractScene() {
-		options = new HashMap<String, Object>();
-		addOption("displayFPS", new SimpleBooleanProperty( false));
+		options = new HashMap();
+		addOption("displayFPS", new SimpleBooleanProperty(false));
 	}
 
-	public void setCanvas(Canvas canvas) {
-			
+	public void setCanvas(Canvas canvas) {         	//   FINISH THIS GUY
+
 	}
 
 	public Canvas getCanvas() {
@@ -27,18 +27,18 @@ public abstract class AbstractScene {
 	}
 
 	public double w() {
-
-		return canvasNode.getWidth();
+		double w = canvasNode.getWidth();
+		return w;
 	}
 
 	public double h() {
-
-		return canvasNode.getHeight();
+		double h = canvasNode.getHeight();
+		return h;
 	}
-	
+
 	public GraphicsContext gc() {
-		
-		return canvasNode.getGraphicsContext2D();
+		GraphicsContext gc = canvasNode.getGraphicsContext2D();
+		return gc;
 	}
 
 	public void addOption(String UniqueName, Object option) {
@@ -46,16 +46,16 @@ public abstract class AbstractScene {
 		if (options.containsKey(UniqueName)) {
 			throw new IllegalStateException("UniqueName already exists");
 		}
+
+		options.put(UniqueName, option);
 	}
 
-	public Object getOption(String UniqueName) {
+	public Object getOption(String UniqueName) {				 // CHECK IF THIS IS RIGHT
 		// TODO Auto-generated method stub
-		return UniqueName;
+		Object opt = options.get(UniqueName);
+		return opt;
 	}
 
-	public AbstractScene createScene() {
-		return null;
-
-	}
+	public abstract AbstractScene createScene();
 
 }

@@ -96,14 +96,15 @@ public class QuadTreeSimulator extends Application {
 		ColorDetectionScene scene = new ColorDetectionScene();
 		scene.setCanvas(canvas);
 		scene.createScene();
-		
-		QuadTreeAnimator animator = new QuadTreeAnimator();
-		animator.setScene(scene);
-		
+
+		animator = new QuadTreeAnimator();
+		animator.setScene(scene); // There is no setScene in UML of QuadTreeAnimator. Should it be in AbstractScene???
+									
+
 		Region statusBar = createStatusBar();
 		Region optionsBar = createOptionsBar();
 		Region colorBar = createColorBar();
-		
+
 		root = new BorderPane();
 		root.setTop(optionsBar);
 		root.setBottom(statusBar);
@@ -162,7 +163,7 @@ public class QuadTreeSimulator extends Application {
 		//TODO Complete
 		
 		ObjectProperty <Color> colorOption;
-		colorOption = new SimpleObjectProperty(Color.BLACK);
+		colorOption = new SimpleObjectProperty<Color>(Color.BLACK);
 		
 		scene.addOption("color", colorOption);
 		

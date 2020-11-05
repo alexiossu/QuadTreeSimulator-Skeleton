@@ -47,5 +47,9 @@ public class QuadTree extends GenericEntity {
 	public void push() {
 		
 	}
+	
+	public void clear() {
+		
+	}
 	 
 }

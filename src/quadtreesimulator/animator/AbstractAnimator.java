@@ -1,6 +1,7 @@
 package quadtreesimulator.animator;
 
 import javafx.animation.AnimationTimer;
+import javafx.beans.property.BooleanProperty;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import quadtreesimulator.entity.FpsCounter;
@@ -61,9 +62,11 @@ public abstract class AbstractAnimator extends AnimationTimer {
 
 	public void handle(long now) {
 
-		scene.gc();
+		GraphicsContext gc = scene.gc();  
+		
+		BooleanProperty drawFPS = (BooleanProperty) scene.getOption("displayFPS");
 
-		if (scene.getOption("displayFPS") != null) { // SUPPOSE TO RETURN BooleanProperty
+		if (drawFPS.get()) { // SUPPOSE TO RETURN BooleanProperty
 
 			fps.calculateFPS(now);
 
@@ -73,14 +76,14 @@ public abstract class AbstractAnimator extends AnimationTimer {
 		this.handle(gc, now);
 		gc.restore();
 
-		if (scene.getOption("displayFPS") != null) {
+		if (drawFPS.get()) {
 
 			Sprite s = fps.getDrawable();
 			s.draw(gc);
 		}
 	}
 
-	protected void handle(GraphicsContext gc, long now) {
-		// TODO Auto-generated method stub
-	}
+	protected abstract void handle(GraphicsContext gc, long now);
+	
+	public abstract void setScene(AbstractScene scene);
 }
